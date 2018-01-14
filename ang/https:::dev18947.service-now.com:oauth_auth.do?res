@@ -1,0 +1,5 @@
+https://dev18947.service-now.com/oauth_auth.do?response_type=token&redirect_uri=http://localhost:8000/#!/authenticated&client_id=0c851653a1e34300aedbd82da68d0e97
+
+https://dev18947.service-now.com/oauth_auth.do?response_type=token&redirect_uri=http://localhost:8000%2F%23%21%2Fauthenticated&client_id=0c851653a1e34300aedbd82da68d0e97
+
+https://dev18947.service-now.com/oauth_auth.do?response_type=token&redirect_uri=http://localhost:8000%2F%23%21%2Fauthenticated&client_id=0c851653a1e34300aedbd82da68d0e97

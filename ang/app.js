@@ -20,9 +20,25 @@ routes = {
 	'/protected' : {
 			templateUrl : 'ang/view2.html',
 			controller : 'protectedController',
-			mainController : 'pc',
+			controllerAs : 'pc',
 			authRequired : true
-		}
+		},
+
+	'/noauth' : {
+			templateUrl : 'ang/view3.html',
+			controller : 'noauthController',
+			controllerAs : 'noc',
+			authRequired : false
+
+		},
+
+	'/authenticated' : {
+			templateUrl : 'ang/view4.html',
+			controller : 'yesauthController',
+			controllerAs : 'yoc',
+			authRequired : false
+		},
+
 }
 
 
@@ -32,14 +48,16 @@ function appConfig($routeProvider){
 	});
 }
 
-function run($rootScope,$window){
+function run($rootScope,$window,$location,$localStorage){
 	$rootScope.$on("$locationChangeStart",function(event, next, prev){
 		//alert("TEST");
+		$localStorage.sntkn = $localStorage.sntkn || "";
 		var toGoRoute = next.split('#!')[1];
-		if(toGoRoute in routes && routes[toGoRoute].authRequired){
+		if(toGoRoute in routes && routes[toGoRoute].authRequired && $localStorage.sntkn == ""){
 			//alert('authRequired');
 			event.preventDefault();
-			$window.location.href = "https://google.com";
+			//$window.location.href = "https://google.com";
+			$location.path('/noauth')
 		}
 	});
 }
