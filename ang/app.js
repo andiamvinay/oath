@@ -1,12 +1,15 @@
 	angular
 	.module('app',[
-		'ngRoute',
-		'ngStorage'
-		])
+						'ngRoute',
+						'ngStorage'
+				  ]
+		   )
 	.config(appConfig)
 	.run(run);
 
 //appConfig.$inject = ['$routeProvider'];
+
+//Application Routes
 
 routes = {
 
@@ -42,21 +45,20 @@ routes = {
 }
 
 
+//Configuring the routes defined to the route provider.
 function appConfig($routeProvider){
 	Object.keys(routes).forEach(function(key){
 		$routeProvider.when(key,routes[key]);
 	});
 }
 
+// Runs on every location Change start and check whether the user is authenticated.
 function run($rootScope,$window,$location,$localStorage){
 	$rootScope.$on("$locationChangeStart",function(event, next, prev){
-		//alert("TEST");
 		$localStorage.sntkn = $localStorage.sntkn || "";
 		var toGoRoute = next.split('#!')[1];
 		if(toGoRoute in routes && routes[toGoRoute].authRequired && $localStorage.sntkn == ""){
-			//alert('authRequired');
 			event.preventDefault();
-			//$window.location.href = "https://google.com";
 			$location.path('/noauth')
 		}
 	});
